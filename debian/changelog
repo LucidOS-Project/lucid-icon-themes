@@ -1,0 +1,5 @@
+lucidos-icon-themes (0.3.0) noble; urgency=medium
+
+  * Updated the icon-theme.cache for Light Mode and Dark Mode themes, while logging new changes with the debian folder
+
+ -- Javid Medina <javidamedina@gmail.com>  Tue, 21 Apr 2026 16:00:00 -0400
