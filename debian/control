@@ -1,7 +1,7 @@
 Source: lucidos-icon-themes
 Section: gnome
 Priority: extra
-Maintainer: Javid Alekzander Medina <javidamedina@gmail.com>
+Maintainer: Javid Medina <javidamedina@gmail.com>
 Build-Depends: debhelper (>= 10)
 Standards-Version: 4.1.1
 
