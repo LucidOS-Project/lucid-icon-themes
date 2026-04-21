@@ -1,0 +1,13 @@
+Source: lucidos-icon-themes
+Section: gnome
+Priority: extra
+Maintainer: Javid Alekzander Medina <javidamedina@gmail.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.1
+
+Package: lucidos-icon-themes
+Architecture: all
+Depends: ${misc:Depends}
+Description: LucidOS Icon Themes
+ The custom glassmorphic icon theme for LucidOS, featuring 
+ Light and dark mode icons for LucidOS.
