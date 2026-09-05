@@ -1,0 +1,11 @@
+See COPYING.md for the full licence map.
+
+In short:
+
+  Lucid, Lucid-Dark      LucidOS's own icons.          CC-BY-NC-SA-4.0
+  Lucid-Everything       WhiteSur, by vinceliuice.     GPL-3.0
+
+Lucid is for LucidOS-specific icons. Lucid-Everything is a separate icon theme
+covering everything LucidOS does not draw itself, and it is somebody else's
+work under a different licence -- see Lucid-Everything/COPYING and
+Lucid-Everything/AUTHORS.

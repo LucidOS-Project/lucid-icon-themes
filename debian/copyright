@@ -1,13 +1,48 @@
-Format: http://dep.debian.net/deps/dep5
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: lucid-icon-themes
+Comment:
+ This source package ships three icon themes under two licences. Lucid and
+ Lucid-Dark are original LucidOS artwork. Lucid-Everything is a renamed copy of
+ WhiteSur-icon-theme by vinceliuice and is GPL-3.0; it contains no LucidOS
+ artwork. The GPL does not permit adding restrictions such as NonCommercial, so
+ the two are stated separately here rather than under one Files: * stanza.
+ See COPYING.md at the root of the source tree.
 
 Files: *
-Copyright: 2025-2026 Lucid Devices.
 Copyright: 2025-2026 Javid Medina
+           2025-2026 Lucid Devices
 License: CC-BY-NC-SA-4.0
 Comment:
- All artwork and assets are licensed under the Creative Commons
- Attribution-NonCommercial-ShareAlike 4.0 International license (CC-BY-NC-SA-4.0).
+ LucidOS original artwork (Lucid, Lucid-Dark) and the packaging.
+ .
+ Not every file under Lucid and Lucid-Dark is LucidOS's own work: some icons
+ are by oviotti and are included with the author's express permission rather
+ than under this licence. They are not yet enumerated; see COPYING.md and the
+ README at the root of the source tree.
+
+Files: Lucid-Everything/*
+Copyright: vinceliuice and the WhiteSur-icon-theme contributors
+License: GPL-3
+Comment:
+ A renamed copy of https://github.com/vinceliuice/WhiteSur-icon-theme.
+ Renaming is the only modification; see Lucid-Everything/AUTHORS.
+
+License: GPL-3
+ This program is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along with
+ this program. If not, see <https://www.gnu.org/licenses/>.
+ .
+ On Debian systems the full text of the GNU General Public License version 3 can
+ be found in /usr/share/common-licenses/GPL-3, and in this source tree in
+ Lucid-Everything/COPYING.
 
 License: CC-BY-NC-SA-4.0
  Attribution-NonCommercial-ShareAlike 4.0 International
