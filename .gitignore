@@ -1,0 +1,3 @@
+# Backups left beside a file being edited by hand. They are a local safety net,
+# not a second copy of the theme for everyone who clones this.
+*.bak
