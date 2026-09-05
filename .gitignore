@@ -13,7 +13,11 @@
 # dpkg-buildpackage leavings. The staging root under debian/ is a second copy
 # of the whole theme -- 120 MB of it -- and the rest is generated per build.
 /debian/.debhelper/
+# Every binary package's staging root, not just the one that existed when
+# this line was written -- naming them individually is how a second
+# package's staging directory got committed.
 /debian/lucidos-icon-themes/
+/debian/lucid-everything-icon-theme/
 /debian/debhelper-build-stamp
 /debian/files
 /debian/*.substvars
