@@ -62,6 +62,31 @@ the whole tree would not relicense `Lucid-Everything` -- it would simply be a
 term the GPL forbids, which is why the two are stated separately here and in
 `debian/copyright` rather than in one place with one answer.
 
+## The split is a package boundary, not just a paragraph
+
+This file describes the licences. `debian/` enforces them, by building two
+binary packages along the same line:
+
+| Package | Contains | Licence |
+|---|---|---|
+| `lucidos-icon-themes` | `Lucid`, `Lucid-Dark` | CC-BY-NC-SA-4.0 (plus the oviotti files above) |
+| `lucid-everything-icon-theme` | `Lucid-Everything` | GPL-3.0 |
+
+The first **depends** on the second rather than recommending it, because `Lucid`
+inherits it: without it every third-party application falls through to hicolor,
+which is a broken desktop rather than a reduced one.
+
+Splitting them is what makes the licence statement operative. A single package
+containing both would be one `.deb` whose `debian/copyright` claims two
+incompatible licences over one payload, and NonCommercial cannot be applied to
+GPL-3.0 material by putting it in the same archive. CI asserts that neither
+package contains the other's theme, so the boundary is checked on every push
+rather than remembered.
+
+It also means a distribution that cannot accept a NonCommercial package can
+still ship the GPL one, and that anyone redistributing either knows which terms
+they are under from the package name alone.
+
 ## The fallback chain
 
     Lucid  ->  Lucid-Everything  ->  hicolor

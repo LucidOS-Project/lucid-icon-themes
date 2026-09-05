@@ -10,7 +10,36 @@ Standards-Version: 4.1.1
 
 Package: lucidos-icon-themes
 Architecture: all
+Depends: ${misc:Depends}, lucid-everything-icon-theme
+Description: LucidOS icon themes
+ Lucid and Lucid-Dark, the light and dark icon themes drawn for LucidOS.
+ .
+ They cover the applications LucidOS ships and knows about -- roughly a hundred
+ icons -- and they do not attempt the thousands a desktop has to draw an icon
+ for. Lucid inherits lucid-everything-icon-theme for those, which is why that
+ package is a dependency rather than a recommendation: without it every
+ third-party application falls through to hicolor and the desktop looks like a
+ stock Ubuntu with a few custom icons.
+ .
+ These themes are LucidOS's own artwork and are licensed differently from the
+ theme they inherit. See /usr/share/doc/lucidos-icon-themes/copyright.
+
+Package: lucid-everything-icon-theme
+Architecture: all
 Depends: ${misc:Depends}
-Description: LucidOS Icon Themes
- The custom glassmorphic icon theme for LucidOS, featuring 
- Light and dark mode icons for LucidOS.
+Description: broad icon coverage beneath the LucidOS themes (GPL-3.0)
+ Lucid-Everything, a renamed copy of WhiteSur-icon-theme by vinceliuice. It
+ covers the third-party applications that LucidOS does not draw icons for, and
+ sits one link down the fallback chain from Lucid and Lucid-Dark:
+ .
+     Lucid  ->  Lucid-Everything  ->  hicolor
+ .
+ It is a separate package because it is under a separate licence. This is
+ somebody else's work under the GPL-3.0, and the GPL does not permit adding
+ restrictions to what it covers -- so it cannot be shipped inside a package
+ whose licence is NonCommercial. Splitting the tree along the licence boundary
+ makes that a fact dpkg enforces rather than a paragraph in a file.
+ .
+ Attribution and the list of changes are in
+ /usr/share/icons/Lucid-Everything/AUTHORS; the licence text is beside it in
+ COPYING.

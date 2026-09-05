@@ -1,3 +1,27 @@
+lucidos-icon-themes (0.4.0) noble; urgency=medium
+
+  * Lucid-Light is now Lucid, and Lucid-Everything sits beneath it as the
+    fallback for the applications LucidOS does not draw icons for.
+  * Split into two binary packages along the licence boundary:
+    lucidos-icon-themes (Lucid, Lucid-Dark, CC-BY-NC-SA-4.0) and
+    lucid-everything-icon-theme (GPL-3.0). The first depends on the second,
+    because Lucid inherits it: without it every third-party icon falls
+    through to hicolor.
+  * debian/install named Lucid-Light*, which had been renamed and so matched
+    nothing. The package installed no icons at all.
+  * index.theme declared 78 directories per theme, of which eleven existed,
+    and ended in a malformed "16x16/" entry that made GTK warn at every
+    application start. Six directories that do exist -- the scalable and
+    symbolic ones -- were never declared, so LucidOS's own folder, user-home
+    and user-trash icons lost to the theme they inherit.
+  * Removed 11,482 AppleDouble and .DS_Store files, 45 MB, which dh_install
+    was copying into the package.
+  * The themes are checked at package build time: every declared directory
+    must exist and contain icons, the index must parse through GKeyFile, and
+    no file may be zero-filled or be macOS metadata.
+
+ -- Javid Medina <javidamedina@gmail.com>  Sat, 05 Sep 2026 23:10:00 -0400
+
 lucidos-icon-themes (0.3.0) noble; urgency=medium
 
   * Updated the icon-theme.cache for Light Mode and Dark Mode themes, while logging new changes with the debian folder

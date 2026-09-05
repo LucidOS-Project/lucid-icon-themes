@@ -42,37 +42,57 @@ jobs:
              ../lucidos-icon-themes_*.buildinfo dist/ 2>/dev/null || true
           ls -la dist
 
-      - name: The package must contain the themes
+      - name: Each package must contain its own licence's files and no others
         run: |
-          deb=$(ls dist/lucidos-icon-themes_*.deb)
-          dpkg-deb -I "$deb"
+          own=$(ls dist/lucidos-icon-themes_*.deb)
+          everything=$(ls dist/lucid-everything-icon-theme_*.deb)
+          dpkg-deb -I "$own"; dpkg-deb -I "$everything"
 
-          # debian/install once read "Lucid-Light* /usr/share/icons/", and
-          # Lucid-Light had been renamed to Lucid. The glob matched nothing, the
-          # build succeeded, and the package installed no icons at all.
-          for t in Lucid Lucid-Dark Lucid-Everything; do
-            dpkg-deb -c "$deb" | grep -q " ./usr/share/icons/$t/index.theme\$" \
-              || { echo "$t/index.theme is not in the package"; exit 1; }
-          done
+          has() { dpkg-deb -c "$1" | grep -q " ./usr/share/icons/$2/index.theme\$"; }
 
-          icons=$(dpkg-deb -c "$deb" | grep -cE '\.(svg|png|xpm)$')
-          echo "$icons icon files in the package"
+          # debian/install once read "Lucid-Light* /usr/share/icons/". Lucid-Light
+          # had been renamed to Lucid, so the glob matched nothing: the build
+          # succeeded and the package installed no icons at all.
+          has "$own" Lucid            || { echo "Lucid is not in lucidos-icon-themes"; exit 1; }
+          has "$own" Lucid-Dark       || { echo "Lucid-Dark is not in lucidos-icon-themes"; exit 1; }
+          has "$everything" Lucid-Everything \
+            || { echo "Lucid-Everything is not in lucid-everything-icon-theme"; exit 1; }
+
+          # The licence boundary, as something dpkg enforces. Lucid-Everything is
+          # GPL-3.0 and the rest is CC-BY-NC-SA; the GPL does not permit adding
+          # restrictions to what it covers, so the two must not share a package.
+          has "$own" Lucid-Everything \
+            && { echo "GPL-3.0 theme inside the CC-BY-NC-SA package"; exit 1; }
+          has "$everything" Lucid \
+            && { echo "CC-BY-NC-SA theme inside the GPL-3.0 package"; exit 1; }
+
+          # Lucid inherits Lucid-Everything, so this is a dependency and not a
+          # recommendation: without it every third-party icon falls to hicolor.
+          dpkg-deb -f "$own" Depends | grep -q 'lucid-everything-icon-theme' \
+            || { echo "lucidos-icon-themes does not depend on the theme it inherits"; exit 1; }
+
+          icons=$(dpkg-deb -c "$own" | grep -cE '\.(svg|png|xpm)$')
+          icons=$((icons + $(dpkg-deb -c "$everything" | grep -cE '\.(svg|png|xpm)$')))
+          echo "$icons icon files across both packages"
           [ "$icons" -gt 20000 ] \
-            || { echo "far too few icons -- did debian/install match anything?"; exit 1; }
+            || { echo "far too few icons -- did the install files match anything?"; exit 1; }
 
           # dh_install copies whole directories, so anything left in the working
           # tree ships. These assets have passed through a Mac.
-          junk=$(dpkg-deb -c "$deb" | grep -cE '/\._|/\.DS_Store$' || true)
-          [ "$junk" -eq 0 ] || { echo "$junk macOS metadata files in the package"; exit 1; }
+          for deb in "$own" "$everything"; do
+            junk=$(dpkg-deb -c "$deb" | grep -cE '/\._|/\.DS_Store$' || true)
+            [ "$junk" -eq 0 ] || { echo "$junk macOS metadata files in $deb"; exit 1; }
+          done
 
       # Installed for real, then asked the question a desktop asks. This is the
       # regression test for the inherit chain: Lucid covers about a hundred
       # applications and inherits Lucid-Everything for the rest, so if Inherits=
       # stops being readable every third-party icon silently falls to hicolor
       # and nothing reports an error.
-      - name: Install it, then resolve icons through it
+      - name: Install both, then resolve icons through them
         run: |
-          sudo apt-get install -y ./dist/lucidos-icon-themes_*.deb
+          sudo apt-get install -y ./dist/lucid-everything-icon-theme_*.deb \
+                                  ./dist/lucidos-icon-themes_*.deb
           for t in Lucid Lucid-Dark Lucid-Everything; do
             test -f "/usr/share/icons/$t/index.theme" || { echo "$t did not install"; exit 1; }
           done

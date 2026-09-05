@@ -1,0 +1,21 @@
+Lucid-Everything is a modified version of WhiteSur-icon-theme.
+
+    Upstream:  WhiteSur-icon-theme
+    Author:    vinceliuice
+    Source:    https://github.com/vinceliuice/WhiteSur-icon-theme
+    Licence:   GNU General Public License, version 3 (see COPYING)
+
+Modifications by the LucidOS project:
+
+    - Renamed from "WhiteSur" to "Lucid-Everything", in index.theme and in
+      the directory name, so it can sit beneath the Lucid theme in the
+      fallback chain without a name collision.
+    - index.theme Name, Comment and Inherits adjusted accordingly.
+
+No LucidOS-original artwork is included in this directory. LucidOS's own
+icons are in ../Lucid and ../Lucid-Dark and are licensed separately; see
+../COPYING.md.
+
+This theme remains under the GPL-3.0, as it must: the licence does not
+permit adding restrictions to it, and it is distributed here on its own
+terms rather than under the LucidOS artwork licence.

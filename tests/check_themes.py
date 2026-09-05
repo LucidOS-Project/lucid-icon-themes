@@ -64,6 +64,15 @@ def check_index(root, theme):
         if not kf.has_group(d):
             fail(f"{theme}: {d} is listed in Directories= but has no [{d}] group")
             continue
+        icons = [n for n in os.listdir(os.path.join(root, theme, d))
+                 if n.lower().endswith((".svg", ".png", ".xpm"))] \
+            if os.path.isdir(os.path.join(root, theme, d)) else []
+        if not icons:
+            # An empty directory is not merely useless here. Two of them only
+            # ever held macOS metadata, so they existed on the machine that
+            # generated this list and not in a fresh clone -- which is a check
+            # that passes locally and fails in CI, the least useful kind.
+            fail(f"{theme}: {d} is declared but contains no icons")
         try:
             kf.get_integer(d, "Size")
         except GLib.Error:

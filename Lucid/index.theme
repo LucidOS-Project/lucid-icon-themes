@@ -21,7 +21,7 @@ PanelDefault=32
 PanelSizes=512,256,128,64,48,32,24,16
 
 # Directories listed from largest to smallest to prefer bigger icons
-Directories=512x512/apps,512x512/mimetypes,256x256/apps,128x128/apps,64x64/apps,24x24/status,16x16/status,scalable/apps,scalable/devices,scalable/mimetypes,scalable/places,scalable/status,symbolic/actions
+Directories=512x512/apps,512x512/mimetypes,256x256/apps,128x128/apps,64x64/apps,scalable/apps,scalable/devices,scalable/mimetypes,scalable/places,scalable/status,symbolic/actions
 
 [16x16/actions]
 Context=Actions
