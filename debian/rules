@@ -2,3 +2,14 @@
 
 %:
 	dh $@
+
+# The themes are checked while the package is being built, not only in CI.
+#
+# This package is data, so nothing here is compiled and nothing would otherwise
+# fail: a truncated index.theme, a directory named in Directories= that does not
+# exist, an icon that is the right length and entirely NUL, or 11,482 AppleDouble
+# sidecars left behind by assets that passed through a Mac all build perfectly
+# and ship. dh_install copies whole directories, so whatever is in the tree is
+# in the .deb. This is the step that makes that untrue.
+override_dh_auto_test:
+	python3 tests/check_themes.py .

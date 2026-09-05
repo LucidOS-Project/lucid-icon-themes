@@ -1,0 +1,88 @@
+name: CI
+
+# This repository had no CI and its .deb had never been built -- not once. Two
+# defects that only a build would have shown were live at the same time:
+# debian/install globbed Lucid-Light*, which had been renamed and so matched
+# nothing, and the package would have shipped 45 MB of macOS metadata because
+# dh_install copies whole directories.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # gir1.2-gtk-4.0 is for the lookup check, which resolves icons the way a
+      # desktop does. It needs no display.
+      - name: Install build and test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            dpkg-dev debhelper fakeroot \
+            python3 python3-gi gir1.2-glib-2.0 gir1.2-gtk-4.0 \
+            gtk-update-icon-cache
+
+      # The tree, before anything packages it. debian/rules runs this too, so a
+      # package build fails on the same conditions -- this step is here so the
+      # failure is legible when it is the tree that is wrong rather than the
+      # packaging.
+      - name: The themes must parse and their directories must exist
+        run: python3 tests/check_themes.py .
+
+      - name: Build the package
+        run: |
+          dpkg-buildpackage -us -uc -b
+          mkdir -p dist
+          mv ../lucidos-icon-themes_*.deb ../lucidos-icon-themes_*.changes \
+             ../lucidos-icon-themes_*.buildinfo dist/ 2>/dev/null || true
+          ls -la dist
+
+      - name: The package must contain the themes
+        run: |
+          deb=$(ls dist/lucidos-icon-themes_*.deb)
+          dpkg-deb -I "$deb"
+
+          # debian/install once read "Lucid-Light* /usr/share/icons/", and
+          # Lucid-Light had been renamed to Lucid. The glob matched nothing, the
+          # build succeeded, and the package installed no icons at all.
+          for t in Lucid Lucid-Dark Lucid-Everything; do
+            dpkg-deb -c "$deb" | grep -q " ./usr/share/icons/$t/index.theme\$" \
+              || { echo "$t/index.theme is not in the package"; exit 1; }
+          done
+
+          icons=$(dpkg-deb -c "$deb" | grep -cE '\.(svg|png|xpm)$')
+          echo "$icons icon files in the package"
+          [ "$icons" -gt 20000 ] \
+            || { echo "far too few icons -- did debian/install match anything?"; exit 1; }
+
+          # dh_install copies whole directories, so anything left in the working
+          # tree ships. These assets have passed through a Mac.
+          junk=$(dpkg-deb -c "$deb" | grep -cE '/\._|/\.DS_Store$' || true)
+          [ "$junk" -eq 0 ] || { echo "$junk macOS metadata files in the package"; exit 1; }
+
+      # Installed for real, then asked the question a desktop asks. This is the
+      # regression test for the inherit chain: Lucid covers about a hundred
+      # applications and inherits Lucid-Everything for the rest, so if Inherits=
+      # stops being readable every third-party icon silently falls to hicolor
+      # and nothing reports an error.
+      - name: Install it, then resolve icons through it
+        run: |
+          sudo apt-get install -y ./dist/lucidos-icon-themes_*.deb
+          for t in Lucid Lucid-Dark Lucid-Everything; do
+            test -f "/usr/share/icons/$t/index.theme" || { echo "$t did not install"; exit 1; }
+          done
+          sudo gtk-update-icon-cache -f -t /usr/share/icons/Lucid
+          sudo gtk-update-icon-cache -f -t /usr/share/icons/Lucid-Dark
+          python3 tests/check_lookup.py /usr/share/icons
+
+      - name: Upload the package
+        uses: actions/upload-artifact@v4
+        with:
+          name: lucidos-icon-themes-deb
+          path: dist/
+          if-no-files-found: error

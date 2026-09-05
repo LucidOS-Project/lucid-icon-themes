@@ -1,8 +1,11 @@
 Source: lucidos-icon-themes
 Section: gnome
-Priority: extra
+Priority: optional
 Maintainer: Javid Medina <javidamedina@gmail.com>
-Build-Depends: debhelper (>= 10)
+Build-Depends: debhelper (>= 10),
+               python3,
+               python3-gi,
+               gir1.2-glib-2.0
 Standards-Version: 4.1.1
 
 Package: lucidos-icon-themes
