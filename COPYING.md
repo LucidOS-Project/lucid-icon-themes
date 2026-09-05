@@ -9,7 +9,7 @@ them; this file is the map.
 | `Lucid/` | CC-BY-NC-SA-4.0 | 2025-2026 Javid Medina / Lucid Devices |
 | `Lucid-Dark/` | CC-BY-NC-SA-4.0 | 2025-2026 Javid Medina / Lucid Devices |
 | `Lucid-Everything/` | **GPL-3.0** | vinceliuice and contributors |
-| certain icons inside `Lucid/` and `Lucid-Dark/` | **neither** -- used by permission | oviotti |
+| the two `scalable/devices/drive-harddisk.svg` | **neither** -- used by permission | oviotti |
 | everything else (packaging, docs) | CC-BY-NC-SA-4.0 | 2025-2026 Javid Medina / Lucid Devices |
 
 `LICENSE` at the root is the CC-BY-NC-SA-4.0 text. It applies to `Lucid`,
@@ -38,12 +38,21 @@ given to this project is not a grant to everyone who receives a copy of it, and
 the CC-BY-NC-SA-4.0 text at the root cannot speak for work whose author has not
 placed it under those terms.
 
-**The files this covers are not yet enumerated here, and they need to be.** A
-licence map that says "some icons in these directories" is not something a
-packager or a redistributor can act on, which is the entire purpose of this
-file. Until the list exists, treat `Lucid/` and `Lucid-Dark/` as containing
-material under two different arrangements and contact the author about the
-oviotti icons, as the README says.
+It is two files, and they are the same artwork twice:
+
+    Lucid-Dark/scalable/devices/drive-harddisk.svg   oviotti's, unmodified
+    Lucid/scalable/devices/drive-harddisk.svg        the same drive, with the
+                                                    LucidOS mark laid over it
+
+The second is a derivative, not a separate work -- same body, same chrome base,
+same indicator, rendered side by side to check. A derivative is still governed
+by the terms the original was received under, so both lines are listed rather
+than only the untouched one.
+
+Nothing else in `Lucid/` or `Lucid-Dark/` is affected. The other three device
+icons -- `drive-multidisk`, `drive-optical`, `drive-removable-media` -- are
+LucidOS's own and are covered by the root licence like the rest of those
+directories.
 
 ## Why the root licence cannot cover all of it
 

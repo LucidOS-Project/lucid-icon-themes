@@ -15,10 +15,24 @@ License: CC-BY-NC-SA-4.0
 Comment:
  LucidOS original artwork (Lucid, Lucid-Dark) and the packaging.
  .
- Not every file under Lucid and Lucid-Dark is LucidOS's own work: some icons
- are by oviotti and are included with the author's express permission rather
- than under this licence. They are not yet enumerated; see COPYING.md and the
- README at the root of the source tree.
+ Excluding the two drive-harddisk.svg files, which are by oviotti; see the
+ stanza below and COPYING.md at the root of the source tree.
+
+Files: Lucid/scalable/devices/drive-harddisk.svg
+       Lucid-Dark/scalable/devices/drive-harddisk.svg
+Copyright: oviotti
+License: other-oviotti
+Comment:
+ From the "Aquatic Drives" set by oviotti (https://www.deviantart.com/oviotti),
+ included with the author's express permission. The Lucid copy is the same
+ drive with the LucidOS mark laid over it, which is a derivative and is
+ therefore governed by the same terms.
+
+License: other-oviotti
+ Used with the express permission of the author, who retains all rights. This
+ is a permission granted to the LucidOS project, not a public licence: it does
+ not by itself grant onward rights to anyone who receives a copy of this
+ package. Contact the author for usage rights covering these files.
 
 Files: Lucid-Everything/*
 Copyright: vinceliuice and the WhiteSur-icon-theme contributors
