@@ -9,3 +9,12 @@
 # the .deb.
 ._*
 .DS_Store
+
+# dpkg-buildpackage leavings. The staging root under debian/ is a second copy
+# of the whole theme -- 120 MB of it -- and the rest is generated per build.
+/debian/.debhelper/
+/debian/lucidos-icon-themes/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/*.substvars
+/debian/*.debhelper

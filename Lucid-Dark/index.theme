@@ -21,7 +21,7 @@ PanelDefault=32
 PanelSizes=512,256,128,64,48,32,24,16
 
 # Directories listed from largest to smallest to prefer bigger icons
-Directories=512x512/actions,512x512/apps,512x512/categories,512x512/devices,512x512/emblems,512x512/emotes,512x512/mimetypes,512x512/places,512x512/status,512x512/ui,256x256/actions,256x256/apps,256x256/categories,256x256/devices,256x256/emblems,256x256/emotes,256x256/mimetypes,256x256/places,256x256/status,256x256/ui,128x128/actions,128x128/apps,128x128/categories,128x128/devices,128x128/emblems,128x128/emotes,128x128/mimetypes,128x128/places,128x128/status,128x128/ui,64x64/actions,64x64/apps,64x64/categories,64x64/devices,64x64/emblems,64x64/emotes,64x64/mimetypes,64x64/places,64x64/status,64x64/ui,48x48/actions,48x48/apps,48x48/categories,48x48/devices,48x48/emblems,48x48/emotes,48x48/mimetypes,48x48/places,48x48/status,48x48/ui,32x32/actions,32x32/apps,32x32/categories,32x32/devices,32x32/emblems,32x32/emotes,32x32/mimetypes,32x32/places,32x32/status,32x32/ui,24x24/actions,24x24/apps,24x24/categories,24x24/devices,24x24/emblems,24x24/emotes,24x24/mimetypes,24x24/places,24x24/status,24x24/ui,16x16/actions,16x16/apps,16x16/categories,16x16/devices,16x16/emblems,16x16/emotes,16x16/mimetypes,16x16/
+Directories=512x512/apps,512x512/mimetypes,256x256/apps,128x128/apps,64x64/apps,scalable/apps,scalable/devices,scalable/mimetypes,scalable/places,scalable/status,symbolic/actions
 
 [16x16/actions]
 Context=Actions
@@ -456,3 +456,45 @@ Type=Fixed
 Context=UI
 Size=512
 Type=Fixed
+
+[scalable/apps]
+Context=Applications
+Size=64
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[scalable/devices]
+Context=Devices
+Size=64
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[scalable/mimetypes]
+Context=MimeTypes
+Size=64
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[scalable/places]
+Context=Places
+Size=64
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[scalable/status]
+Context=Status
+Size=64
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[symbolic/actions]
+Context=Actions
+Size=16
+MinSize=8
+MaxSize=512
+Type=Scalable
