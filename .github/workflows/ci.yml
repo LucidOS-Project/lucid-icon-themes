@@ -41,9 +41,15 @@ jobs:
         run: |
           dpkg-buildpackage -us -uc -b
           mkdir -p dist
-          mv ../lucidos-icon-themes_*.deb ../lucidos-icon-themes_*.changes \
-             ../lucidos-icon-themes_*.buildinfo dist/ 2>/dev/null || true
+          # Both binary packages, and everything dpkg-buildpackage wrote beside
+          # them. Naming one package here is how the split's first CI run
+          # failed: the build produced two .debs and the move collected one.
+          mv ../lucidos-icon-themes_* ../lucid-everything-icon-theme_* dist/ 2>/dev/null || true
           ls -la dist
+          test -f dist/lucidos-icon-themes_*.deb 2>/dev/null \
+            || { echo "lucidos-icon-themes .deb was not produced"; exit 1; }
+          ls dist/lucid-everything-icon-theme_*.deb >/dev/null \
+            || { echo "lucid-everything-icon-theme .deb was not produced"; exit 1; }
 
       - name: Each package must contain its own licence's files and no others
         run: |
