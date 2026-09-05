@@ -39,13 +39,27 @@ MUST_NOT_RESOLVE = ["lucid-no-such-icon-cdd0e1f2"]
 
 
 def lookup(theme_name, name, search_path):
+    """Returns (icon name GTK settled on, file that won).
+
+    Both are needed. A lookup that finds nothing does not return null and does
+    not necessarily return a null file either: GTK falls back to the name
+    "image-missing", and if the theme happens to *have* an image-missing icon --
+    Lucid-Everything ships one at status/32 -- a failed lookup comes back with a
+    perfectly real file. The icon name is what says whether the lookup
+    succeeded; the path is what says where it landed.
+    """
     theme = Gtk.IconTheme.new()
     theme.set_search_path(search_path)
     theme.set_theme_name(theme_name)
     paintable = theme.lookup_icon(name, None, 128, 1, Gtk.TextDirection.NONE,
                                   Gtk.IconLookupFlags.FORCE_REGULAR)
-    f = paintable.get_file() if paintable else None
-    return f.peek_path() if f is not None else None
+    if paintable is None:
+        return None, None
+    f = paintable.get_file()
+    return paintable.get_icon_name(), (f.peek_path() if f is not None else None)
+
+
+MISSING = "image-missing"
 
 
 def main():
@@ -54,17 +68,18 @@ def main():
     failures = 0
 
     for theme, name, expect, why in CASES:
-        path = lookup(theme, name, search_path)
-        ok = path is not None and expect in path
+        got, path = lookup(theme, name, search_path)
+        ok = got != MISSING and path is not None and expect in path
         print(f"  [{'ok' if ok else 'FAIL'}] {theme:11} {name:20} -> {path or '(image-missing)'}")
         if not ok:
             print(f"         expected a file inside {expect} -- {why}")
             failures += 1
 
     for name in MUST_NOT_RESOLVE:
-        path = lookup("Lucid", name, search_path)
-        ok = path is None
-        print(f"  [{'ok' if ok else 'FAIL'}] control     {name:20} -> {path or '(image-missing, as it should be)'}")
+        got, path = lookup("Lucid", name, search_path)
+        ok = got == MISSING
+        shown = "image-missing, as it should be" if ok else f"{got} at {path}"
+        print(f"  [{'ok' if ok else 'FAIL'}] control     {name:20} -> {shown}")
         if not ok:
             print("         a name that exists nowhere resolved to a file, so these "
                   "checks cannot be trusted to fail")
