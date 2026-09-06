@@ -31,6 +31,9 @@ CASES = [
     ("Lucid", "google-chrome", "/Lucid-Everything/", "the inherit chain, which is the whole point of it"),
     ("Lucid", "vscode", "/Lucid-Everything/", "as above"),
     ("Lucid-Dark", "org.gnome.Nautilus", "/Lucid-Dark/", "the dark theme draws this one itself"),
+    ("Lucid-Dark", "folder", "/Lucid-Dark/", "its own folder must beat the inherited one"),
+    ("Lucid-Dark", "google-chrome", "/Lucid-Everything/", "the dark theme inherits the same fallback"),
+    ("Lucid-Dark", "vscode", "/Lucid-Everything/", "this resolved to nothing at all before it did"),
 ]
 
 # Names that must NOT resolve, so a pass means something. Without this the

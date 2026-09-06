@@ -2,7 +2,7 @@
 Name=Lucid-Dark
 Comment=LucidOS Icon Theme
 Example=folder
-Inherits=Adwaita
+Inherits=Lucid-Everything,Adwaita
 
 DisplayDepth=32
 LinkOverlay=link_overlay
