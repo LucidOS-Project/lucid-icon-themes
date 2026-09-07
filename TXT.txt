@@ -1,0 +1,3 @@
+Lucid icon theme is for Lucid specific icons. 
+
+Lucid Everything is a seperate icon theme for anything that LucidOS doesn't already cover.
