@@ -1,3 +1,16 @@
+lucidos-icon-themes (0.4.3) resolute; urgency=medium
+
+  * Icons for foot and Resources, the terminal and the system monitor LucidOS
+    actually ships. Both were showing the generic application icon in
+    LucidOS's own dock, which is the one place a missing icon is not
+    somebody else's problem.
+  * Symlinks to the existing Lucid terminal and Mission Center artwork
+    rather than new drawings. Inventing icons in somebody else's visual
+    language is how a theme stops looking like one theme, and the roles are
+    the same: foot is a terminal, Resources is a system monitor.
+
+ -- Javid Medina <javidamedina@gmail.com>  Mon, 07 Sep 2026 05:55:00 -0400
+
 lucidos-icon-themes (0.4.2) resolute; urgency=medium
 
   * The settings icon is named lucid-settings. It is LucidOS's own artwork --
