@@ -1,3 +1,16 @@
+lucidos-icon-themes (0.4.4) resolute; urgency=medium
+
+  * An icon for GNOME Console, which is the terminal LucidOS ships now. The
+    theme had org.gnome.Terminal and foot; Console asks for
+    org.gnome.Console, so swapping the terminal in the image left the dock
+    falling through to Adwaita's generic black prompt -- the one icon in the
+    dock that was not LucidOS's.
+  * The icon-theme.cache files are regenerated. They are committed rather than
+    built at install time, and a stale cache is authoritative: an icon added
+    beside one is an icon GTK does not see.
+
+ -- Javid Medina <javidamedina@gmail.com>  Mon, 07 Sep 2026 22:40:00 -0400
+
 lucidos-icon-themes (0.4.3) resolute; urgency=medium
 
   * Icons for foot and Resources, the terminal and the system monitor LucidOS
