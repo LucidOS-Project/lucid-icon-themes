@@ -1,3 +1,14 @@
+lucidos-icon-themes (0.4.2) resolute; urgency=medium
+
+  * The settings icon is named lucid-settings. It is LucidOS's own artwork --
+    a gear and a wrench in Lucid's teal -- and it was filed under
+    org.gnome.Settings, which is the name of somebody else's application. The
+    old name stays as a symlink, so the theme still dresses GNOME Settings
+    for anyone using it on GNOME: the artwork was never GNOME's, but that
+    name was the only way it reached the settings window there.
+
+ -- Javid Medina <javidamedina@gmail.com>  Mon, 07 Sep 2026 05:30:00 -0400
+
 lucidos-icon-themes (0.4.1) resolute; urgency=medium
 
   * Targets resolute. 0.3.0 is published in ppa:javidmedina/lucidos for
